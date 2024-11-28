@@ -1,37 +1,43 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Button } from './components/ui/button'
-
+import AuthLayout from "./components/auth/layout";
+import AuthLogin from "./pages/auth/login";
+import NotFound from "./pages/not-found";
+import { Route, Routes } from "react-router-dom";
+import AuthRegister from "./pages/auth/register";
+import ShoppingLayout from "./components/shop/layout";
+import ShoppingAccount from "./pages/shop/shopping-acount";
+import ShoppingHome from "./pages/shop/home";
+import ShoppingListing from "./pages/shop/shopping-listing";
+import ShoppingCheckout from "./pages/shop/shopping-checkout";
+import AdminLayout from "./components/admin/layout";
+import AdminDashboard from "./pages/admin/admin-dashboard";
+import AdminProducts from "./pages/admin/admin-products";
+import AdminOrders from "./pages/admin/admin-orders";
+import AdminFeatures from "./pages/admin/admin-features";
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-        <a href="https://google.com"><Button>Click Me</Button></a>
-      </p>
-    </>
-  )
+    <div className="flex flex-col overflow-hidden bg-white">
+      <p>common Header</p>
+      <Routes>
+        <Route path="/auth" element={<AuthLayout />}>
+          <Route path="login" element={<AuthLogin />}></Route>
+          <Route path="register" element={<AuthRegister />}></Route>
+        </Route>
+        <Route path="/admin" element={<AdminLayout />}>
+          <Route path="dashboard" element={<AdminDashboard />}></Route>
+          <Route path="products" element={<AdminProducts />}></Route>
+          <Route path="orders" element={<AdminOrders />}></Route>
+          <Route path="features" element={<AdminFeatures />}></Route>
+        </Route>
+        <Route path="/shop" element={<ShoppingLayout />}>
+          <Route path="home" element={<ShoppingHome />}></Route>
+          <Route path="account" element={<ShoppingAccount />}></Route>
+          <Route path="listing" element={<ShoppingListing />}></Route>
+          <Route path="checkout" element={<ShoppingCheckout />}></Route>
+        </Route>
+        <Route path="*" element={<NotFound />}></Route>
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;
