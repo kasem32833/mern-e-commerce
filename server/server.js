@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require('cookie-parser');
 const cors = require('cors');
+const authRouter = require("./routers/auth/auth-router");
 
 // create a database connection
 
@@ -34,4 +35,5 @@ app.use(express.json());
 
 app.listen(PORT, ()=>console.log(`Server is running on port : ${PORT}`))
 
+app.use('/api/auth' ,authRouter)
 
